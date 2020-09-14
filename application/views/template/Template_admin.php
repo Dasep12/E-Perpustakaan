@@ -1,4 +1,4 @@
-
+<?php $url = $this->uri->segment(2); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +18,12 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets')?>/dist/css/skins/_all-skins.min.css">
-<!-- DataTables -->
+  <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets')?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets')?>/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url('assets')?>/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -31,6 +35,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
