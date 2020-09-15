@@ -31,7 +31,7 @@
           <form action="" method="post" id="uploadFile">
             <div class="form-group mb-2">
             <label>Upload File di sini</label>
-            <input type="file" class="form-control" name="file" id="file">
+            <input type="file" onchange="return cek()" class="form-control" name="file" id="file">
           </div>
             <button type="submit" class="mb-2 btn btn-info btn-sm"><i class="fa fa-upload"></i> Upload Data</button>
             <a href="<?php echo base_url('assets/template/format_upload.xlsx') ?>" class="btn btn-danger btn-sm mb-2"><i class="fa fa-download"></i> Download Template</a>
@@ -70,7 +70,21 @@
     <!-- /.content -->
 
   <script type="text/javascript">
-
+//cek ekstensi file yang boleh di upload
+function cek(){
+      var file = document.getElementById("file");
+      var path = file.value ;
+      var exe = /(\.xlsx)$/i;
+        if(!exe.exec(path)){
+          swal({
+            icon : "error" ,
+            dangerMode : [true,"Ok"],
+            title : "Perhatian" ,
+            text : "Ekstensi File Tidak di Ijinkan"
+          });
+          file.value = "" ;
+        }
+    }
 
 
 

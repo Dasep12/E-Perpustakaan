@@ -1,13 +1,13 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Master Data Member
+        Data Diri Administrator
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Master</a></li>
-        <li class="active">Detail Data Member</li>
+        <li class="active">Detail Administrator</li>
       </ol>
     </section>
 
@@ -16,28 +16,26 @@
 
       <!-- Default box -->
       <div class="box">
-        <div class="box-header with-border">
+        <div class="box-header with-border ">
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
-           
           </div>
-          <a href="<?php echo base_url('admin/Master_member') ?>" class="btn btn-primary btn-sm mb-2">Master Member <i class="fa fa-user"></i> </a>
         </div>
         <div class="box-body">
           <div class="row">
             <div class="col-md-4">
-              <form method="post" enctype="multipart/form-data " id="updateProfile" class="form-horizontal">
-                   <?php if(!empty($member->photo)) { ?>
-                    <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $member->photo) ?>">
+              <form method="post" enctype="multipart/form-data " id="updateProfileAdmin" class="form-horizontal">
+                  <?php if(!empty($admin->photo)) { ?>
+                    <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $admin->photo) ?>">
                    <?php }else { ?>
-                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/poto/siswa.jpg') ?>">
+                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/poto/admin2 - Copy.png') ?>">
                    <?php } ?>
-                   <input type="hidden" name="id" value="<?php echo $member->id; ?>">
-                   <input type="hidden" name="photo" value="<?php echo $member->photo; ?>">
-                   <input type="hidden" name="idmember" value="<?php echo $member->id_user; ?>">
+                   <input type="hidden" name="id" value="<?php echo $admin->id ?>">
+                   <input type="hidden" name="photo" value="<?php echo $admin->photo ?>">
+                   <input type="hidden" name="id_akun" value="<?php echo $admin->id_akun ?>">
                    <input type="file" onchange="return cek()" name="file" id="file" style="margin-top: 2px;margin-bottom: 3px;" class="form-control">
                    <div class="progress active mt-2" id="load" style="display:none; ;">
                     <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -49,43 +47,52 @@
             </div>
 
             <div class="col-md-8">
-              <form method="post" enctype="multipart/form-data" id="updateMember" class="form-horizontal">
+              <form method="post" enctype="multipart/form-data" id="updateadmin" class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">ID Member</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">ID Akun</label>
                   <div class="col-sm-10">
-                     <input type="hidden" name="id" value="<?php echo $member->id; ?>">
-                    <input value="<?php echo $member->id_user ?>" readonly="" type="text" class="form-control" name="idmember" id="idmember" placeholder="Input ID Member">
+                     <input type="hidden" name="id" value="<?php echo $admin->id ?>">
+                    <input readonly="" value="<?php echo $admin->id_akun ?>" type="text" class="form-control" name="id_akun" id="id_akun" placeholder="Input ID Admin">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" value="<?php echo $member->nama ?>" class="form-control" name="nama" id="nama" placeholder="Input Nama Member">
+                    <input type="text"  value="<?php echo $admin->nama ?>" class="form-control" name="nama" id="nama" placeholder="Input Nama Admin">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">No Telpon</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $member->no_telp ?>"  name="notelp" id="notelp" placeholder="Input No Telpon Member">
+                    <input type="text" class="form-control"  value="<?php echo $admin->no_telp ?>" name="no_telp" id="notelp" placeholder="Input No Telpon Akun">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" value="<?php echo $member->email ?>" class="form-control" name="email" id="email" placeholder="Input Email Member">
+                    <input type="text" class="form-control" value="<?php echo $admin->email ?>" name="email" id="email" placeholder="Input Email Admin">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">New Password</label>
                   <div class="col-sm-10">
-                    <textarea placeholder="Iput Alamat" class="form-control" id="alamat" name="alamat"><?php echo $member->alamat ?></textarea>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Input New Password">
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Rewrite - New Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password2" id="password2" placeholder="Input Re-New Password">
+                  </div>
+                </div>
+
+
 
 
                 <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Data</button>
@@ -122,23 +129,23 @@ function cek(){
     }
 
   $(function(){
-      $("#updateMember").on('submit',function(e){
+      $("#updateadmin").on('submit',function(e){
         e.preventDefault();
-          if(document.getElementById('idmember').value == ""){
+          if(document.getElementById('id_akun').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "ID Member Belum di Input"
+                text : "ID Akun Belum di Input"
               }).then(function(){
-                $("#idmember").focus();
+                $("#id_akun").focus();
               })
           }else if(document.getElementById('nama').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Nama Member Belum di Input"
+                text : "Nama Admin Belum di Input"
               }).then(function(){
                 $("#nama").focus();
               })
@@ -160,31 +167,37 @@ function cek(){
               }).then(function(){
                 $("#email").focus();
               })
-          }else if(document.getElementById('alamat').value == ""){
+          }else if(document.getElementById('password').value != document.getElementById('password2').value  ){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Alamat  Belum di Input"
+                text : "Password Harus Sama"
               }).then(function(){
-                $("#alamat").focus();
+                $("#password").focus();
               })
           }else {
               $.ajax({
-                  url : "<?php echo base_url('admin/Master_member/update') ?>" ,
+                  url : "<?php echo base_url('admin/Profile/update') ?>" ,
                   method : "POST" ,
                   data : new FormData(this),
                   processData : false ,
                   cache : false ,
                   contentType : false ,
                   success : function(e){
-                     // alert(e);
-                      if(e == "Berhasil Update Data Member"){
+                      if(e == "Update Password Sukses"){
                         swal({
                           icon : "success" ,
                           title : e 
                         }).then(function(){
-                          window.location.href="<?php echo base_url('admin/Master_member/view/' . $member->id_user) ?>"
+                          window.location.href="<?php echo base_url('admin/Profile/') ?>"
+                        })
+                      }else if(e == "Update Data Sukses"){
+                        swal({
+                          icon : "success" ,
+                          title : e 
+                        }).then(function(){
+                          window.location.href="<?php echo base_url('admin/Profile/') ?>"
                         })
                       }else {
                         swal({
@@ -199,7 +212,7 @@ function cek(){
       })
 
       //update poto profile member
-      $("#updateProfile").on("submit",function(e){
+      $("#updateProfileAdmin").on("submit",function(e){
         e.preventDefault();
           if(document.getElementById("file").value == ""){
             swal({
@@ -210,7 +223,7 @@ function cek(){
             })
           }else {
             $.ajax({
-                  url : "<?php echo base_url('admin/Master_member/updateProfile') ?>" ,
+                  url : "<?php echo base_url('admin/Profile/updateProfile') ?>" ,
                   method : "POST" ,
                   data : new FormData(this),
                   processData : false ,
@@ -223,12 +236,12 @@ function cek(){
                      $("#load").hide();
                   },
                   success : function(e){
-                     if(e == "Berhasil Update Member"){
+                     if(e == "Berhasil Update Data"){
                         swal({
                           icon : "success" ,
                           title : e 
                         }).then(function(){
-                          window.location.href="<?php echo base_url('admin/Master_member/view/' . $member->id_user) ?>"
+                          window.location.href="<?php echo base_url('admin/Profile/') ?>"
                         })
                       }else {
                         swal({
