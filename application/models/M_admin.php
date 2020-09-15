@@ -33,4 +33,10 @@ class M_admin extends CI_Model
 		return $this->db->delete($table);
 
 	}
+
+
+	public function insert($data)
+	{
+		$this->db->insert_batch('master_buku', $data);
+	}
 }

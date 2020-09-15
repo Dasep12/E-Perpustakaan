@@ -25,7 +25,7 @@
            
           </div>
           <a href="<?php echo base_url('admin/Master_buku') ?>" class="btn btn-primary btn-sm mb-2">Master Buku <i class="fa fa-book"></i> </a>
-          <a href="" class="btn btn-success btn-sm mb-2">Upload CSV <i class="fa fa-file"></i> </a>
+          <a href="<?php echo base_url('admin/Upload_buku') ?>" class="btn btn-success btn-sm mb-2">Upload CSV <i class="fa fa-file"></i> </a>
         </div>
         <div class="box-body">
              <form method="post" id="inputBuku" class="form-horizontal">

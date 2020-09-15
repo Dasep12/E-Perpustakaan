@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
+  <title>E-Perpustakaan</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -230,8 +230,8 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             
           </a>
-        </li>
-        <li class="treeview <?php if($url == "Master_buku" || $url == "Master_anggota" ) { echo "active" ; } ?>">
+        </li> 
+        <li class="treeview <?php if($url == "Master_buku" || $url == "Master_member" || $url == "Upload_buku"  ) { echo "active" ; } ?>">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Kelola Data</span>
             <span class="pull-right-container">
@@ -239,8 +239,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=" <?php if($url == "Master_buku") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Master_buku')?>"><i class="fa fa-circle-o"></i> Master Buku</a></li>
-            <li class=" <?php if($url == "Master_anggota") { echo "active" ; } ?>"><a href="<?php echo base_url('assets')?>/index2.html"><i class="fa fa-circle-o"></i> Master Anggota</a></li>
+            <li class=" <?php if($url == "Master_buku" || $url == "Upload_buku") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Master_buku')?>"><i class="fa fa-circle-o"></i> Master Buku</a></li>
+            <li class=" <?php if($url == "Master_member") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Master_member')?>"><i class="fa fa-circle-o"></i> Master Anggota</a></li>
           </ul>
         </li>
         <li class="treeview">
