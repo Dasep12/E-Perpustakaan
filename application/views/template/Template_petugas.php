@@ -162,8 +162,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
+            <li><a href="<?php echo base_url('petugas/Histori_pinjam') ?>"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
+            <li><a href="<?php echo base_url('petugas/Histori_kembali') ?>"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
           </ul>
         </li>
       </ul>
@@ -217,9 +217,7 @@
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-
     $('#example1').DataTable();
-
   })
 </script>
 </body>

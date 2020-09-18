@@ -30,12 +30,20 @@
 
  	public function inputPeminjaman()
  	{
+ 		$token = "";
+      $codeAlphabet= "0123456789";
+      $max = strlen($codeAlphabet); // edited
+        
+      for ($i=0; $i < 12; $i++) {
+       $token .= $codeAlphabet[random_int(0, $max-1)];
+      }
  		$idbuku 		= $this->input->post("id_buku");
  		$kdbuku 		= $this->input->post("kd_buku");
  		$judul 			= $this->input->post("judul_buku");
  		$idpeminjam 	= $this->input->post("id_user");
  		$tgl_pinjam 	= $this->input->post("tgl_pinjam");
  		$tgl_kembali 	= $this->input->post("tgl_kembali");
+ 		$id_pinjam      = date("Ymd") . $token ;
  		$user = $this->m_petugas->cari(array("id_user" => $idpeminjam),"member")->row();
  		$stock =  $this->m_petugas->cari(array("id" => $idbuku),"master_buku")->row();
 
@@ -45,7 +53,8 @@
  			"id_peminjam"		=> $idpeminjam ,
  			"peminjam"			=> $user->nama, 
  			"tgl_pinjam"		=> $tgl_pinjam ,
- 			"tgl_kembali"		=> $tgl_kembali 
+ 			"tgl_kembali"		=> $tgl_kembali ,
+ 			"id_peminjaman"		=> "EPERPUS".$id_pinjam
  		);
 
  	//jika stock buku 0 maka tidak bisa

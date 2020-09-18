@@ -1,98 +1,261 @@
-/*
-SQLyog Enterprise - MySQL GUI v8.05 
-MySQL - 5.5.5-10.4.11-MariaDB : Database - e_perpus
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 18 Sep 2020 pada 14.20
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.2.30
 
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-/*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`e_perpus` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+--
+-- Database: `e_perpus`
+--
 
-USE `e_perpus`;
+-- --------------------------------------------------------
 
-/*Table structure for table `akun` */
-
-DROP TABLE IF EXISTS `akun`;
+--
+-- Struktur dari tabel `akun`
+--
 
 CREATE TABLE `akun` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `id_akun` varchar(255) DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `no_telp` varchar(15) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `role_id` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `role_id` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `akun` */
+--
+-- Dumping data untuk tabel `akun`
+--
 
-insert  into `akun`(`id`,`nama`,`id_akun`,`photo`,`password`,`no_telp`,`email`,`role_id`) values (1,'Dasep','002','002tanggapan.png','123','083821691460','dasep@gmail.com',1);
+INSERT INTO `akun` (`id`, `nama`, `id_akun`, `photo`, `password`, `no_telp`, `email`, `role_id`) VALUES
+(1, 'Dasep', '002', '002tanggapan.png', '123', '083821691460', 'dasep@gmail.com', 1);
 
-/*Table structure for table `master_buku` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `master_buku`;
+--
+-- Struktur dari tabel `histori_kembali`
+--
+
+CREATE TABLE `histori_kembali` (
+  `id` int(11) NOT NULL,
+  `id_peminjaman` varchar(255) DEFAULT NULL,
+  `judul_buku` varchar(255) DEFAULT NULL,
+  `kd_buku` varchar(255) DEFAULT NULL,
+  `id_peminjam` varchar(255) DEFAULT NULL,
+  `peminjam` varchar(150) DEFAULT NULL,
+  `tgl_pinjam` date DEFAULT NULL,
+  `tgl_dikembalikan` date DEFAULT NULL,
+  `tgl_kembali` date DEFAULT NULL,
+  `jam_kembali` varchar(25) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `denda` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `histori_kembali`
+--
+
+INSERT INTO `histori_kembali` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`, `status`, `denda`) VALUES
+(2, 'EPERPUS20200918657331241904', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-28', '18:57:18', '', ''),
+(3, 'EPERPUS20200918734365672062', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-20', '18:57:41', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `histori_pinjam`
+--
+
+CREATE TABLE `histori_pinjam` (
+  `id` int(11) NOT NULL,
+  `id_peminjaman` varchar(255) DEFAULT NULL,
+  `judul_buku` varchar(200) DEFAULT NULL,
+  `kd_buku` varchar(200) DEFAULT NULL,
+  `id_peminjam` varchar(200) DEFAULT NULL,
+  `peminjam` varchar(200) DEFAULT NULL,
+  `tgl_pinjam` varchar(200) DEFAULT NULL,
+  `tgl_dikembalikan` varchar(200) DEFAULT NULL,
+  `tgl_kembali` varchar(200) DEFAULT NULL,
+  `jam_kembali` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `histori_pinjam`
+--
+
+INSERT INTO `histori_pinjam` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`) VALUES
+(20, 'EPERPUS20200918657331241904', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-28', '18:57:18'),
+(21, 'EPERPUS20200918734365672062', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-20', '18:57:41');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `master_buku`
+--
 
 CREATE TABLE `master_buku` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `kd_buku` varchar(30) DEFAULT NULL,
   `judul_buku` varchar(255) DEFAULT NULL,
   `thn_terbit` varchar(30) DEFAULT NULL,
   `pengarang` varchar(255) DEFAULT NULL,
   `lokasi` varchar(100) DEFAULT NULL,
   `jumlah` int(12) DEFAULT NULL,
-  `genre` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4;
+  `genre` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `master_buku` */
+--
+-- Dumping data untuk tabel `master_buku`
+--
 
-insert  into `master_buku`(`id`,`kd_buku`,`judul_buku`,`thn_terbit`,`pengarang`,`lokasi`,`jumlah`,`genre`) values (37,'BK0090','Belajar Membaca','2020','Satudin S,Pd','Rak-01',0,'Edukasi'),(38,'BK005','Pandai Menghitung','2020','Brian S,Kom','RAK-02',3,'Edukasi');
+INSERT INTO `master_buku` (`id`, `kd_buku`, `judul_buku`, `thn_terbit`, `pengarang`, `lokasi`, `jumlah`, `genre`) VALUES
+(37, 'BK0090', 'Belajar Membaca', '2020', 'Satudin S,Pd', 'Rak-01', 0, 'Edukasi'),
+(38, 'BK005', 'Pandai Menghitung', '2020', 'Brian S,Kom', 'RAK-02', 4, 'Edukasi');
 
-/*Table structure for table `member` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `member`;
+--
+-- Struktur dari tabel `member`
+--
 
 CREATE TABLE `member` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `id_user` varchar(255) NOT NULL,
   `no_telp` varchar(255) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`,`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  `photo` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `member` */
+--
+-- Dumping data untuk tabel `member`
+--
 
-insert  into `member`(`id`,`nama`,`id_user`,`no_telp`,`email`,`alamat`,`status`,`photo`) values (1,'Dasep Depiyawan','01','083821619460','dasepdepiyawan19@gmail.com','Jl Lodan Dalam Raya II c Jakarta Utara','Member','01Logo_STMIK1.png');
+INSERT INTO `member` (`id`, `nama`, `id_user`, `no_telp`, `email`, `alamat`, `status`, `photo`) VALUES
+(1, 'Dasep Depiyawan', '01', '083821619460', 'dasepdepiyawan19@gmail.com', 'Jl Lodan Dalam Raya II c Jakarta Utara', 'Member', '01Logo_STMIK1.png');
 
-/*Table structure for table `peminjaman` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `peminjaman`;
+--
+-- Struktur dari tabel `peminjaman`
+--
 
 CREATE TABLE `peminjaman` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
+  `id_peminjaman` varchar(255) DEFAULT NULL,
   `judul_buku` varchar(255) DEFAULT NULL,
   `kd_buku` varchar(255) DEFAULT NULL,
   `id_peminjam` varchar(220) DEFAULT NULL,
   `peminjam` varchar(255) DEFAULT NULL,
   `tgl_pinjam` varchar(255) DEFAULT NULL,
   `tgl_kembali` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+  `perpanjangan` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `peminjaman` */
+--
+-- Dumping data untuk tabel `peminjaman`
+--
 
-insert  into `peminjaman`(`id`,`judul_buku`,`kd_buku`,`id_peminjam`,`peminjam`,`tgl_pinjam`,`tgl_kembali`) values (6,'Pandai Menghitung','BK005','01','Dasep Depiyawan','2020-09-17','2020-09-19');
+INSERT INTO `peminjaman` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_kembali`, `perpanjangan`) VALUES
+(19, 'EPERPUS20200918934233430297', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-19', NULL);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `akun`
+--
+ALTER TABLE `akun`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `histori_kembali`
+--
+ALTER TABLE `histori_kembali`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `histori_pinjam`
+--
+ALTER TABLE `histori_pinjam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `master_buku`
+--
+ALTER TABLE `master_buku`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`id`,`id_user`);
+
+--
+-- Indeks untuk tabel `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `akun`
+--
+ALTER TABLE `akun`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `histori_kembali`
+--
+ALTER TABLE `histori_kembali`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `histori_pinjam`
+--
+ALTER TABLE `histori_pinjam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT untuk tabel `master_buku`
+--
+ALTER TABLE `master_buku`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT untuk tabel `member`
+--
+ALTER TABLE `member`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

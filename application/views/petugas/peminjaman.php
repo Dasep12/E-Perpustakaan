@@ -1,7 +1,7 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Master Data Buku
+      Data Peminjaman Buku
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -36,6 +36,7 @@
                   <th>Peminjam</th>
                   <th>Tanggal Peminjaman</th>
                   <th>Tanggal Kembali</th>
+                  <th>Perpanjangan</th>
                   <th>Status</th>
                   <th>Aksi</th>
                 </tr>
@@ -49,19 +50,19 @@
                     <td><?php echo $result->peminjam ; ?></td>
                     <td><?php echo $result->tgl_pinjam ; ?></td>
                     <td><?php echo $result->tgl_kembali ; ?></td>
+                    <td><?php echo $result->perpanjangan ; ?></td>
                     <td>
                       <?php 
-                          if($result->tgl_kembali > new DateTime()  ){
-                            echo "Buku terlambat";
-                          }else {
-                            echo "-";
-                          }
+                        $tanggal1 = new DateTime($result->tgl_kembali);
+                        $tanggal2 = new DateTime();
+                        $telat = $tanggal2->diff($tanggal1)->format("%a");
+                        echo $telat . " hari";
                        ?>
                        
                      </td>
                     <td>
-                      <a href="" class="btn btn-danger btn-xs">kembali</a>
-                      <a href="" class="btn btn-info btn-xs">perpanjang</a>
+                      <a href="javascript:kembalikan('<?php echo $result->id ?>')" class="btn btn-danger btn-xs">kembali</a>
+                      <a href="javascript:;" data-id=" <?php echo $result->id ?>" data-toggle="modal" data-target="#perpanjangan" class="btn btn-info btn-xs">perpanjang</a>
                     </td>
                   </tr>
                 <?php endforeach ?>
@@ -76,11 +77,161 @@
       </div>
       <!-- /.box -->
 
+        <!-- modal form perpanjangan peminjaman -->
+         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="perpanjangan" class="modal fade">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                      <h6>Peminjaman Buku <b id="no_inv"></b></h6>
+                     </div>
+                     <div class="modal-body" id="output_list">
+                      <!-- output hasil di sini -->
+                      <form action="" id="formPerpanjangan" method="post">
+                        <div class="form-group">
+                            <label>ID Peminjaman</label>
+                            <input type="hidden" name="id" id="id">
+                            <input type="text" readonly="" name="id_peminjaman" id="id_peminjaman" class="form-control">
+                          </div> 
+
+                          <div class="form-group">
+                            <label>Tanggal Peminjaman</label>
+                            <input type="text" readonly="" name="tgl_pinjam" id="tgl_pinjam" class="form-control">
+                          </div>
+
+                          <div class="form-group">
+                            <label>Tanggal Harus Kembali</label>
+                            <input type="text" readonly="" name="tgl_kembali" id="tgl_kembali" class="form-control">
+                          </div>    
+
+                          <div class="form-group">
+                            <label>Tanggal Perpanjang</label>
+                            <input type="text"  name="tgl_perpanjang" id="tgl_perpanjang" class="form-control">
+                          </div> 
+                      </div>
+                     <div class="modal-footer">
+                  <button class="btn btn-danger btn-sm">Perpanjang</button>
+                 </div>
+               </form>
+                     </div>
+                 </div>
+        <!-- end of modal lihat pembelian -->
     </section>
     <!-- /.content -->
 
+
+
+
   <script type="text/javascript">
-    $(function(){
-      $('#example1').DataTable();
+
+// kembalikan buku 
+function kembalikan(id){
+    swal({
+      title: "Kembalikan Buku ?",
+      text: "Pastikan Kondisi Buku Sesuai ",
+      icon: "warning",
+      buttons: [true,"Kembalikan"],
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+          $.ajax({
+            url : "<?php echo base_url('petugas/Peminjaman/kembalikanBuku') ?>",
+            method : "GET",
+            data : "id="+ id ,
+            success : function(response){
+                if(response == "Sukses"){
+                  swal({
+                    icon : "success" ,
+                    title : response ,
+                    text : "Buku di terima "
+                  }).then(function(){
+                    window.location.href="<?php echo base_url('petugas/Peminjaman') ?>"
+                  })
+                }else {
+                  swal({
+                    icon : "error" ,
+                    dangerMode : [true,"Ok"],
+                    title : response
+                  })
+                }
+            }
+
+          })
+      }
+    });
+  }
+
+
+
+$(function(){
+      
+$('#example1').DataTable();
+
+
+//tampilkan modal perpanjangan peminjaman buku 
+    $("#perpanjangan").on('show.bs.modal',function(e){
+        var div = $(e.relatedTarget);
+        var modal = $(this);
+        var id = div.data("id");
+          $.ajax({
+            url : "<?php echo  base_url("petugas/Peminjaman/modal_perpanjangan") ?>" ,
+            data :"id="+ id ,
+            method : "GET",
+            success : function(response){
+              var data = JSON.parse(response);
+               document.getElementById('id_peminjaman').value = data.id_peminjaman ;
+               document.getElementById('tgl_pinjam').value = data.tgl_pinjam ;
+               document.getElementById('tgl_kembali').value = data.tgl_kembali ;
+               document.getElementById('id').value = data.id ;
+            }
+
+          })
+    }) 
+
+    //menentukan tanggal perpanjangan pengembalian buku
+          $("#tgl_perpanjang").datepicker({
+              format: 'yyyy-mm-dd',
+              autoclose: true,
+              todayHighlight: true,
+              startDate: new Date()
+          });
+
+          $("#formPerpanjangan").on('submit',function(e){
+            e.preventDefault();
+              if(document.getElementById("tgl_perpanjang").value == ""){
+                swal({
+                  icon : "error" ,
+                  dangerMode : [true,"Ok"],
+                  title : "Perhatian" ,
+                  text : "Tanggal perpanjangan belum di isi"
+                })
+              }else {
+                $.ajax({
+                  url : "<?php echo base_url('petugas/Peminjaman/perpanjanganTanggal') ?>" ,
+                  data : new FormData(this) ,
+                  cache : false ,
+                  method : "POST" ,
+                  processData : false ,
+                  contentType : false ,
+                  success : function(e){
+                      if(e == "Berhasil"){
+                        swal({
+                          icon : "success" ,
+                          title : e ,
+                          text : "Peminjaman di Perpanjang "
+                        }).then(function(){
+                          window.location.href="<?php echo base_url('petugas/Peminjaman') ?>"
+                        })
+                      }else {
+                          swal({
+                            icon : "error" ,
+                            dangerMode : [true,"Ok"],
+                            title : e
+                          })
+                      }
+                  }
+                })
+              }
+          })
     });
   </script>

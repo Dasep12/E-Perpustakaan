@@ -16,6 +16,13 @@
  		return $this->db->insert($table,$data);
  	}
 
+    public function delete($where,$table)
+    {
+        $this->db->where($where);
+        return $this->db->delete($table);
+
+    }
+
  	public function update($data,$table,$where)
 	{
 		$this->db->where($where);

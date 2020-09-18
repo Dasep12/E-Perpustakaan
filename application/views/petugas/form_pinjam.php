@@ -20,6 +20,7 @@
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
           </div>
+            Form Pinjam Buku
         </div>
         <div class="box-body">
              <form method="post" id="inputPeminjaman" class="form-horizontal">
@@ -52,14 +53,14 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Peminjaman</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control pinjam"  name="tgl_pinjam" id="tgl_pinjam" placeholder="Input Tanggal Peminjaman">
+                    <input type="text" class="form-control pinjam" autocomplete="off"  name="tgl_pinjam" id="tgl_pinjam" placeholder="Input Tanggal Peminjaman">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Tanggal Kembali</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="tgl_kembali" id="tgl_kembali" placeholder="Input Tanggal Kembali">
+                    <input type="text" class="form-control" autocomplete="off" name="tgl_kembali" id="tgl_kembali" placeholder="Input Tanggal Kembali">
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Data</button>
@@ -183,6 +184,7 @@
         format: 'yyyy-mm-dd',
         autoclose: true,
         todayHighlight: true,
+        startDate: new Date()
     });
     $("#tgl_pinjam").on('changeDate', function(selected) {
         var startDate = new Date(selected.date.valueOf());
