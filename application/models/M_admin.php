@@ -39,4 +39,22 @@ class M_admin extends CI_Model
 	{
 		$this->db->insert_batch('master_buku', $data);
 	}
+
+	//ambiil report peminjaman buku berdasarkan 2 tanggal
+	public function report($tgl_awal, $tgl_akhir , $table)
+	{
+		$this->db->where("tgl_pinjam >=",$tgl_awal);
+		$this->db->where("tgl_pinjam <=",$tgl_akhir);
+		return $this->db->get($table);
+
+	}
+
+	//ambiil report pengembalian buku berdasarkan 2 tanggal
+	public function report2($tgl_awal, $tgl_akhir , $table)
+	{
+		$this->db->where("tgl_dikembalikan >=",$tgl_awal);
+		$this->db->where("tgl_dikembalikan <=",$tgl_akhir);
+		return $this->db->get($table);
+
+	}
 }

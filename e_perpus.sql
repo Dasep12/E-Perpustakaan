@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Sep 2020 pada 14.20
+-- Waktu pembuatan: 21 Sep 2020 pada 05.23
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.30
 
@@ -43,7 +43,8 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id`, `nama`, `id_akun`, `photo`, `password`, `no_telp`, `email`, `role_id`) VALUES
-(1, 'Dasep', '002', '002tanggapan.png', '123', '083821691460', 'dasep@gmail.com', 1);
+(1, 'Dasep', '002', '', '123', '083821691460', 'dasep@gmail.com', 1),
+(2, 'Petugas', '003', '003ppppp.png', '123', 'dd', 'petugas@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -63,16 +64,18 @@ CREATE TABLE `histori_kembali` (
   `tgl_kembali` date DEFAULT NULL,
   `jam_kembali` varchar(25) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `denda` varchar(255) DEFAULT NULL
+  `denda` varchar(255) DEFAULT NULL,
+  `telat_pengembalian` varchar(255) DEFAULT NULL,
+  `total_lama_pinjam` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `histori_kembali`
 --
 
-INSERT INTO `histori_kembali` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`, `status`, `denda`) VALUES
-(2, 'EPERPUS20200918657331241904', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-28', '18:57:18', '', ''),
-(3, 'EPERPUS20200918734365672062', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-20', '18:57:41', '', '');
+INSERT INTO `histori_kembali` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`, `status`, `denda`, `telat_pengembalian`, `total_lama_pinjam`) VALUES
+(22, 'EPERPUS20200921658840468635', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-16', '2020-09-21', '2020-09-19', '09:14:47', NULL, '4000', '2', '5'),
+(23, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19', NULL, '0', '0', '3');
 
 -- --------------------------------------------------------
 
@@ -98,8 +101,8 @@ CREATE TABLE `histori_pinjam` (
 --
 
 INSERT INTO `histori_pinjam` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`) VALUES
-(20, 'EPERPUS20200918657331241904', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-28', '18:57:18'),
-(21, 'EPERPUS20200918734365672062', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-18', '2020-09-20', '18:57:41');
+(40, 'EPERPUS20200921658840468635', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-16', '2020-09-21', '2020-09-19', '09:14:47'),
+(41, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19');
 
 -- --------------------------------------------------------
 
@@ -124,7 +127,7 @@ CREATE TABLE `master_buku` (
 
 INSERT INTO `master_buku` (`id`, `kd_buku`, `judul_buku`, `thn_terbit`, `pengarang`, `lokasi`, `jumlah`, `genre`) VALUES
 (37, 'BK0090', 'Belajar Membaca', '2020', 'Satudin S,Pd', 'Rak-01', 0, 'Edukasi'),
-(38, 'BK005', 'Pandai Menghitung', '2020', 'Brian S,Kom', 'RAK-02', 4, 'Edukasi');
+(38, 'BK005', 'Pandai Menghitung', '2020', 'Brian S,Kom', 'RAK-02', 5, 'Edukasi');
 
 -- --------------------------------------------------------
 
@@ -148,7 +151,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `nama`, `id_user`, `no_telp`, `email`, `alamat`, `status`, `photo`) VALUES
-(1, 'Dasep Depiyawan', '01', '083821619460', 'dasepdepiyawan19@gmail.com', 'Jl Lodan Dalam Raya II c Jakarta Utara', 'Member', '01Logo_STMIK1.png');
+(1, 'Dasep Depiyawan', '01', '083821619460', 'dasepdepiyawan19@gmail.com', 'Jl Lodan Dalam Raya II c Jakarta Utara', 'Member', '01admin2.png');
 
 -- --------------------------------------------------------
 
@@ -167,13 +170,6 @@ CREATE TABLE `peminjaman` (
   `tgl_kembali` varchar(255) DEFAULT NULL,
   `perpanjangan` varchar(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `peminjaman`
---
-
-INSERT INTO `peminjaman` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_kembali`, `perpanjangan`) VALUES
-(19, 'EPERPUS20200918934233430297', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-19', NULL);
 
 --
 -- Indexes for dumped tables
@@ -223,19 +219,19 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `histori_kembali`
 --
 ALTER TABLE `histori_kembali`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `histori_pinjam`
 --
 ALTER TABLE `histori_pinjam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_buku`
@@ -253,7 +249,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

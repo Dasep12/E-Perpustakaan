@@ -1,4 +1,6 @@
-<?php $url = $this->uri->segment(2); ?>
+<?php $url = $this->uri->segment(2); 
+$profile = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,23 +79,30 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="user-image" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="user-image" alt="User Image">
+                <?php } ?>
               <span class="hidden-xs">Petugas</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
+                <?php } ?>
 
                 <p>
-                  Alexander Pierce - Administrator
-                  <small>Member since Nov. 2012</small>
+                  Depiyawan - Petugas
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?php echo base_url('admin/Profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?php echo base_url('petugas/Profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -119,10 +128,14 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+           <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
+                <?php } ?>
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Dasep</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -140,20 +153,20 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li>
+        <li class="<?php if($url == "Form_pinjam"){ echo "active" ;} ?>">
           <a href="<?php echo base_url('petugas/Form_pinjam') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li> 
 
-        <li>
+        <li class="<?php if($url == "Peminjaman"){ echo "active" ;} ?>">
           <a href="<?php echo base_url('petugas/Peminjaman') ?>">
             <i class="fa fa-book"></i> <span>Peminjaman Buku</span>
           </a>
         </li> 
         
         
-        <li class="treeview">
+        <li class="treeview  <?php if($url == "Histori_pinjam" || $url == "Histori_kembali" ){ echo "active" ;} ?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Laporan</span>
@@ -162,8 +175,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('petugas/Histori_pinjam') ?>"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
-            <li><a href="<?php echo base_url('petugas/Histori_kembali') ?>"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
+            <li  class="<?php if($url == "Histori_pinjam"){ echo "active" ;} ?>"><a href="<?php echo base_url('petugas/Histori_pinjam') ?>"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
+            <li class="<?php if($url == "Histori_kembali"){ echo "active" ;} ?>"><a href="<?php echo base_url('petugas/Histori_kembali') ?>"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
           </ul>
         </li>
       </ul>
@@ -181,10 +194,9 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <b>YOUR IP</b> <?php echo $_SERVER['REMOTE_ADDR'] ?>
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2014-2016 <a href="">Dasep Depiyawan</a>.</strong> E-Perpustakaan
   </footer>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed

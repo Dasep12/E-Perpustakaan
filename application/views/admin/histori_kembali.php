@@ -1,13 +1,13 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      Log Peminjaman  Buku
+       Log  Pengembalian  Buku
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Laporan</a></li>
-        <li class="active">Histori Peminjaman </li>
+        <li><a href="#">Log</a></li>
+        <li class="active">Histori Pengembalian </li>
       </ol>
     </section>
 
@@ -24,7 +24,7 @@
               <i class="fa fa-minus"></i></button>
            
           </div>
-          Histori Peminjaman Buku
+          Histori Pengembalian Buku
         </div>
         <div class="box-body">
           <table id="masterBuku" class="table table-bordered table-striped">
@@ -35,6 +35,9 @@
                   <th>Judul Buku</th>
                   <th>Kode Buku</th>
                   <th>Peminjam</th>
+                  <th>Tanggal Pinjam</th>
+                  <th>Tanggal Kembali</th>
+                  <th>Tanggal Di Kembalikan</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +60,7 @@
 
       //kirim request data buku dalam bentuk json 
        $.ajax({
-        url : "<?= base_url('petugas/Histori_pinjam/sendData') ?>",
+        url : "<?= base_url('admin/Histori_kembali/sendData') ?>",
         async : false ,
         dataType : 'json',
         success : function(msg){
@@ -65,7 +68,7 @@
            var data = [] ;
            var j = 1 ;
             for(i=0 ; i < msg.length ; i++){
-              data.push([j++ , "<a href='' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  ]);
+              data.push([j++ , "<a href='' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  , msg[i].tgl_pinjam  , msg[i].tgl_kembali , msg[i].tgl_dikembalikan + "/" + msg[i].jam_kembali]);
             }
             //tampilkan data buku yang di kirim lewat ajax ke datatable
             $("#masterBuku").DataTable({

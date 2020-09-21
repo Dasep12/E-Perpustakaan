@@ -57,7 +57,7 @@
 
       //kirim request data buku dalam bentuk json 
        $.ajax({
-        url : "<?= base_url('petugas/Histori_pinjam/sendData') ?>",
+        url : "<?= base_url('admin/Histori_pinjam/sendData') ?>",
         async : false ,
         dataType : 'json',
         success : function(msg){

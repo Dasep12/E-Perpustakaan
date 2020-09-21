@@ -1,13 +1,13 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       Data Peminjaman  Buku
+       Data Pengembalian  Buku
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Master</a></li>
-        <li class="active">Histori Peminjaman </li>
+        <li class="active">Histori Pengembalian </li>
       </ol>
     </section>
 
@@ -24,7 +24,7 @@
               <i class="fa fa-minus"></i></button>
            
           </div>
-          Histori Peminjaman Buku
+          Histori Pengembalian Buku
         </div>
         <div class="box-body">
           <table id="masterBuku" class="table table-bordered table-striped">
@@ -37,7 +37,7 @@
                   <th>Peminjam</th>
                   <th>Tanggal Pinjam</th>
                   <th>Tanggal Kembali</th>
-                  <th>Status</th>
+                  <th>Tanggal Di Kembalikan</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,7 +68,7 @@
            var data = [] ;
            var j = 1 ;
             for(i=0 ; i < msg.length ; i++){
-              data.push([j++ , "<a href='' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  , msg[i].tgl_pinjam  , msg[i].tgl_kembali , "kembali"]);
+              data.push([j++ , "<a href='' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  , msg[i].tgl_pinjam  , msg[i].tgl_kembali , msg[i].tgl_dikembalikan + "/" + msg[i].jam_kembali]);
             }
             //tampilkan data buku yang di kirim lewat ajax ke datatable
             $("#masterBuku").DataTable({

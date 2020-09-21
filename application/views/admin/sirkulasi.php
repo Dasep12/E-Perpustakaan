@@ -140,7 +140,7 @@ function kembalikan(id){
     .then((willDelete) => {
       if (willDelete) {
           $.ajax({
-            url : "<?php echo base_url('petugas/Peminjaman/kembalikanBuku') ?>",
+            url : "<?php echo base_url('admin/Sirkulasi/kembalikanBuku') ?>",
             method : "GET",
             data : "id="+ id ,
             success : function(response){
@@ -150,7 +150,7 @@ function kembalikan(id){
                     title : response ,
                     text : "Buku di terima "
                   }).then(function(){
-                    window.location.href="<?php echo base_url('petugas/Peminjaman') ?>"
+                    window.location.href="<?php echo base_url('admin/Sirkulasi') ?>"
                   })
                 }else {
                   swal({
@@ -212,7 +212,7 @@ $('#example1').DataTable();
                 })
               }else {
                 $.ajax({
-                  url : "<?php echo base_url('petugas/Peminjaman/perpanjanganTanggal') ?>" ,
+                  url : "<?php echo base_url('admin/Sirkulasi/perpanjanganTanggal') ?>" ,
                   data : new FormData(this) ,
                   cache : false ,
                   method : "POST" ,
@@ -225,7 +225,7 @@ $('#example1').DataTable();
                           title : e ,
                           text : "Peminjaman di Perpanjang "
                         }).then(function(){
-                          window.location.href="<?php echo base_url('petugas/Peminjaman') ?>"
+                          window.location.href="<?php echo base_url('admin/Sirkulasi') ?>"
                         })
                       }else {
                           swal({

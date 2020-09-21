@@ -4,12 +4,12 @@ date_default_timezone_set('Asia/Jakarta');
 /**
  * 
  */
-class Peminjaman extends CI_Controller
+class Sirkulasi extends CI_Controller
 {
 	public function index()
 	{
 		$data['peminjaman'] = $this->m_petugas->getData("peminjaman")->result();
-		$this->template->load("template/template_petugas","petugas/peminjaman",$data);
+		$this->template->load("template/template_admin","admin/sirkulasi",$data);
 	}
 
 	//fungsi untuk mengembalikan buku

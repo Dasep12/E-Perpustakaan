@@ -1,4 +1,6 @@
-<?php $url = $this->uri->segment(2); ?>
+<?php $url = $this->uri->segment(2);
+$profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +36,8 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- jQuery 3 -->
-<script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
+  <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -66,18 +68,25 @@
          
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="user-image" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="user-image" alt="User Image">
+                <?php } ?>
               <span class="hidden-xs">Administrator</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
+                <?php } ?>
 
                 <p>
-                  Alexander Pierce - Administrator
-                  <small>Member since Nov. 2012</small>
+                  Depiyawan - Petugas
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -109,10 +118,14 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url('assets')?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+           <?php if(empty($profile->photo)) { ?>
+                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                <?php }else { ?>
+                 <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
+                <?php } ?>
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Depiyawan</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -133,7 +146,6 @@
         <li>
           <a href="../widgets.html">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            
           </a>
         </li> 
         <li class="treeview <?php if($url == "Master_buku" || $url == "Master_member" || $url == "Upload_buku"  ) { echo "active" ; } ?>">
@@ -148,33 +160,53 @@
             <li class=" <?php if($url == "Master_member") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Master_member')?>"><i class="fa fa-circle-o"></i> Master Anggota</a></li>
           </ul>
         </li>
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li> -->
         
-        <li class="treeview">
+        <li class="treeview <?php if($url == "Histori_kembali" || $url == "Histori_pinjam" ) { echo "active" ; } ?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Laporan</span>
+            <span>Log </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
+            <li class=" <?php if($url == "Histori_pinjam") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Histori_pinjam') ?>"><i class="fa fa-circle-o"></i>History Peminjaman</a></li>
+            <li class=" <?php if($url == "Histori_kembali") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Histori_kembali') ?>"><i class="fa fa-circle-o"></i>History Pengembalian</a></li>
+          </ul>
+        </li>
+
+        <li class=" <?php if($url == "Sirkulasi") { echo "active" ; } ?>">
+          <a  href="<?php echo base_url('admin/Sirkulasi') ?>">
+            <i class="fa  fa-mail-forward "></i> <span>Sirkulasi Peminjaman</span>
+             <small class="label pull-right bg-red">3</small>
+          </a>
+        </li> 
+
+         <li class="treeview <?php if($url == "LaporanPeminjaman" || $url == "LaporanPengembalian" || $url == "LaporanData_Buku" || $url == "LaporanData_Anggota") { echo "active" ; } ?>">
+          <a href="#">
+            <i class="fa fa-file"></i> <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if($url == "LaporanPeminjaman") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/LaporanPeminjaman') ?>"><i class="fa fa-circle-o"></i> Laporan Peminjaman</a></li>
+            <li class=" <?php if($url == "LaporanPengembalian") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/LaporanPengembalian') ?>"><i class="fa fa-circle-o"></i> Laporan Pengembalian</a></li>
+            <li class="<?php if($url == "LaporanData_Buku") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/LaporanData_Buku') ?>"><i class="fa fa-circle-o"></i> Laporan Data Buku</a></li>
+            <li class="<?php if($url == "LaporanData_Anggota") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/LaporanData_Anggota') ?>"><i class="fa fa-circle-o"></i> Laporan Data Anggota</a></li>
+          </ul>
+        </li>
+        <li class="treeview <?php if($url == "Administrator" || $url == "Petugas" || $url == "Tambah_Pengelola" ) { echo "active" ; } ?>">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Pengelola</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if($url == "Administrator") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Administrator') ?>"><i class="fa fa-circle-o"></i> Administrator</a></li>
+            <li class="<?php if($url == "Petugas") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Petugas') ?>"><i class="fa fa-circle-o"></i> Petugas</a></li>
+            <li class="<?php if($url == "Tambah_Pengelola") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Tambah_Pengelola') ?>"><i class="fa fa-circle-o"></i> Tambah Pengelola</a></li>
           </ul>
         </li>
         <!-- <li class="treeview">
@@ -194,31 +226,7 @@
             <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li> -->
+         -->
         <!-- <li>
           <a href="../calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
@@ -495,7 +503,8 @@
 </div>
 <!-- ./wrapper -->
 
-
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url('assets')?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets')?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
@@ -512,7 +521,7 @@
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-
+   
     $('#example1').DataTable()
     
   })
