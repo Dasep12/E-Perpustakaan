@@ -65,7 +65,9 @@
 				);
 				$update = $this->m_admin->update("akun",$data,array("id" => $this->input->post('id')) );;
 					if($update){
-						unlink($target);
+						if(!empty($fileExist)){
+							unlink($target);
+						}
 						echo "Berhasil Update Data";
 					}else {
 						echo "Gagal";

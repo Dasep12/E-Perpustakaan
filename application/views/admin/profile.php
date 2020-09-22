@@ -2,7 +2,7 @@
     <section class="content-header">
       <h1>
         Data Diri Administrator
-        <small></small>
+        <small><?php echo date("Y-m-d"); ?> / <span id="jam"></span></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -31,7 +31,7 @@
                   <?php if(!empty($admin->photo)) { ?>
                     <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $admin->photo) ?>">
                    <?php }else { ?>
-                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/poto/admin2 - Copy.png') ?>">
+                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/dist/img/001admG001.jpg') ?>">
                    <?php } ?>
                    <input type="hidden" name="id" value="<?php echo $admin->id ?>">
                    <input type="hidden" name="photo" value="<?php echo $admin->photo ?>">
@@ -184,6 +184,12 @@ function cek(){
                   processData : false ,
                   cache : false ,
                   contentType : false ,
+                  beforeSend : function(){
+                    $('.Loading').show();
+                  },
+                  complete : function(){
+                    $('.Loading').hide();
+                  },
                   success : function(e){
                       if(e == "Update Password Sukses"){
                         swal({

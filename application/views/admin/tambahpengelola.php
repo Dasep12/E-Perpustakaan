@@ -1,13 +1,13 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Master Data Buku
+       Tambah Data Pengelola
         <small><?php echo date("Y-m-d"); ?> / <span id="jam"></span></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Master</a></li>
-        <li class="active">Detail Data Buku</li>
+        <li><a href="#">Pengelola</a></li>
+        <li class="active">Tambah Pengelola</li>
       </ol>
     </section>
 
@@ -21,62 +21,68 @@
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
-              <i class="fa fa-minus"></i></button>
-           
+              <i class="fa fa-minus"></i></button>           
           </div>
-          <a href="<?php echo base_url('admin/Master_buku') ?>" class="btn btn-primary btn-sm mb-2">Master Buku <i class="fa fa-book"></i> </a>
+          Tambah Pengelola
         </div>
         <div class="box-body">
-             <form method="post" id="inputBuku" class="form-horizontal">
+             <form method="post" enctype="multipart/form-data" id="inputPengelola" class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Kode Buku</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">ID Pengelola</label>
                   <div class="col-sm-10">
-                    <input type="hidden" name="id" value="<?php echo $buku->id ?>">
-                    <input type="text" class="form-control" name="kd_buku" value="<?php echo $buku->kd_buku ?>" id="kdbuku" placeholder="Input Kode Buku">
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Judul Buku</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $buku->judul_buku ?>" name="judul_buku"  id="judul_buku" placeholder="Input  Judul Buku">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Tahun Terbit</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $buku->thn_terbit ?>" name="thn_terbit" id="thn_terbit" placeholder="Input  Tahun Terbit Buku">
+                    <input type="text" class="form-control" name="idpengelola" readonly="" value="<?php echo $idakun ?>" id="idpengelola" placeholder="Input ID Pengelola">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Pengarang</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $buku->pengarang ?>" name="pengarang" id="pengarang" placeholder="Input  Pengarang Buku">
+                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Input Nama Pengelola">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Genre Buku</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">No Telpon</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $buku->genre ?>" name="genre" id="genre" placeholder="Input  Genre / Kategori Buku">
+                    <input type="text" class="form-control" name="notelp" id="notelp" placeholder="Input No Telpon Pengelola">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Lokasi Penyimpanan</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $buku->lokasi ?>" name="lokasi" id="lokasi" placeholder="Input  Lokasi Storage Buku">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Input Email Pengelola">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Jumlah Buku</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Level</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" value="<?php echo $buku->jumlah ?>" name="jumlah" id="jumlah" placeholder="QTY Jumlah Buku">
+                    <select class="form-control" id="role_id" name="role_id">
+                        <option value="">Pilih Level Pengelola</option>
+                        <option value="1">Admninistrator</option>
+                        <option value="2">Petugas</option>
+                    </select>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Perbarui Data</button>
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Input Password Pengelola">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Photo</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="file" id="file" >
+                  </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Data</button>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -91,74 +97,65 @@
     <!-- /.content -->
 <script type="text/javascript">
   $(function(){
-      $("#inputBuku").on('submit',function(e){
+      $("#inputPengelola").on('submit',function(e){
         e.preventDefault();
-          if(document.getElementById('kdbuku').value == ""){
+          if(document.getElementById('idpengelola').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Kode Buku Belum di Input"
+                text : "ID Pengelola Belum di Input"
               }).then(function(){
-                $("#kdbuku").focus();
+                $("#idpengelola").focus();
               })
-          }else if(document.getElementById('judul_buku').value == ""){
+          }else if(document.getElementById('nama').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Judul Buku Belum di Input"
+                text : "Nama Pengelola Belum di Input"
               }).then(function(){
-                $("#judul_buku").focus();
+                $("#nama").focus();
               })
-          }else if(document.getElementById('thn_terbit').value == ""){
+          }else if(document.getElementById('notelp').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Tahun Terbit Buku Belum di Input"
+                text : "No Telpon Belum di Input"
               }).then(function(){
-                $("#thn_terbit").focus();
+                $("#notelp").focus();
               })
-          }else if(document.getElementById('pengarang').value == ""){
+          }else if(document.getElementById('email').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Pengarang Buku Belum di Input"
+                text : "Email Belum di Input"
               }).then(function(){
-                $("#pengarang").focus();
+                $("#email").focus();
               })
-          }else if(document.getElementById('genre').value == ""){
+          }else if(document.getElementById('role_id').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Genre Buku Belum di Input"
+                text : "Level Pengelola di Input"
               }).then(function(){
-                $("#genre").focus();
+                $("#role_id").focus();
               })
-          }else if(document.getElementById('lokasi').value == ""){
+          }else if(document.getElementById('password').value == ""){
               swal({
                 icon : "error" ,
                 dangerMode : [true,"Ok"],
                 title : "Perhatian" ,
-                text : "Lokasi Penyimpanan Buku Belum di Input"
+                text : "Password Pengelola di Input"
               }).then(function(){
-                $("#lokasi").focus();
-              })
-          }else if(document.getElementById('jumlah').value == ""){
-              swal({
-                icon : "error" ,
-                dangerMode : [true,"Ok"],
-                title : "Perhatian" ,
-                text : "Jumlah Buku Belum di Input"
-              }).then(function(){
-                $("#jumlah").focus();
+                $("#password").focus();
               })
           }else {
               $.ajax({
-                  url : "<?php echo base_url('admin/Master_buku/update') ?>" ,
+                  url : "<?php echo base_url('admin/TambahPengelola/input') ?>" ,
                   method : "POST" ,
                   data : new FormData(this),
                   processData : false ,
@@ -171,12 +168,13 @@
                     $('.Loading').hide();
                   },
                   success : function(e){
-                      if(e == "Sukses Update Buku"){
+                      //alert(e);
+                      if(e == "Berhasil Tambah Pengelola"){
                         swal({
                           icon : "success" ,
                           title : e 
                         }).then(function(){
-                          window.location.href="<?php echo base_url('admin/Master_buku/view/' . $buku->kd_buku) ?>"
+                          window.location.href="<?php echo base_url('admin/TambahPengelola') ?>"
                         })
                       }else {
                         swal({

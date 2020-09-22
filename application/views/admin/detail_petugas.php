@@ -1,13 +1,13 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Master Data Admin
+        Master Data Petugas
         <small><?php echo date("Y-m-d"); ?> / <span id="jam"></span></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Pengelola</a></li>
-        <li class="active">Detail Data Admin</li>
+        <li class="active">Detail Data Petugas</li>
       </ol>
     </section>
 
@@ -24,20 +24,20 @@
               <i class="fa fa-minus"></i></button>
            
           </div>
-          <a href="<?php echo base_url('admin/Administrator') ?>" class="btn btn-primary btn-sm mb-2">Master Admin <i class="fa fa-user"></i> </a>
+          <a href="<?php echo base_url('admin/Petugas') ?>" class="btn btn-primary btn-sm mb-2">Master Petugas <i class="fa fa-user"></i> </a>
         </div>
         <div class="box-body">
           <div class="row">
             <div class="col-md-4">
               <form method="post" enctype="multipart/form-data " id="updateProfile" class="form-horizontal">
-                   <?php if(!empty($admin->photo)) { ?>
-                    <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $admin->photo) ?>">
+                   <?php if(!empty($petugas->photo)) { ?>
+                    <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $petugas->photo) ?>">
                    <?php }else { ?>
                     <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/dist/img/001admG001.jpg')?>">
                    <?php } ?>
-                   <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
-                   <input type="hidden" name="photo" value="<?php echo $admin->photo; ?>">
-                   <input type="hidden" name="idmember" value="<?php echo $admin->id_akun; ?>">
+                   <input type="hidden" name="id" value="<?php echo $petugas->id; ?>">
+                   <input type="hidden" name="photo" value="<?php echo $petugas->photo; ?>">
+                   <input type="hidden" name="idmember" value="<?php echo $petugas->id_akun; ?>">
                    <input type="file" onchange="return cek()" name="file" id="file" style="margin-top: 2px;margin-bottom: 3px;" class="form-control">
                    <div class="progress active mt-2" id="load" style="display:none; ;">
                     <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -49,38 +49,38 @@
             </div>
 
             <div class="col-md-8">
-              <form method="post" id="updateAdmin" class="form-horizontal">
+              <form method="post" id="updatePetugas" class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">ID Member</label>
                   <div class="col-sm-10">
-                     <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
-                    <input value="<?php echo $admin->id_akun ?>" readonly="" type="text" class="form-control" name="idmember" id="idmember" placeholder="Input ID Akun">
+                     <input type="hidden" name="id" value="<?php echo $petugas->id; ?>">
+                    <input value="<?php echo $petugas->id_akun ?>" readonly="" type="text" class="form-control" name="idmember" id="idmember" placeholder="Input ID Akun">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" value="<?php echo $admin->nama ?>" class="form-control" name="nama" id="nama" placeholder="Input Nama Admin">
+                    <input type="text" value="<?php echo $petugas->nama ?>" class="form-control" name="nama" id="nama" placeholder="Input Nama Admin">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">No Telpon</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $admin->no_telp ?>"  name="notelp" id="notelp" placeholder="Input No Telpon Admin">
+                    <input type="text" class="form-control" value="<?php echo $petugas->no_telp ?>"  name="notelp" id="notelp" placeholder="Input No Telpon Admin">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" value="<?php echo $admin->email ?>" class="form-control" name="email" id="email" placeholder="Input Email Admin">
+                    <input type="text" value="<?php echo $petugas->email ?>" class="form-control" name="email" id="email" placeholder="Input Email Admin">
                   </div>
                 </div>
-               <button type="submit" style="margin-left: 20px;" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Data</button>
-                <a href="javascript:reset('<?php echo  $admin->id ?>')" class="btn btn-danger pull-right"><i class="fa fa-refresh"></i> Reset Password</a>
+                <button type="submit" style="margin-left: 20px;" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Data</button>
+                <a href="javascript:reset('<?php echo  $petugas->id ?>')" class="btn btn-danger pull-right"><i class="fa fa-refresh"></i> Reset Password</a>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -112,6 +112,8 @@ function cek(){
           file.value = "" ;
         }
  }
+//============//
+
 
 /*Resett Password */
 function reset(id){
@@ -125,7 +127,7 @@ function reset(id){
     .then((willDelete) => {
       if (willDelete) {
           $.ajax({
-            url : "<?php echo base_url('admin/Administrator/Reset') ?>",
+            url : "<?php echo base_url('admin/Petugas/Reset') ?>",
             method : "GET",
             data : "id="+ id ,
             success : function(response){
@@ -134,7 +136,7 @@ function reset(id){
                       icon : "success",
                       title : "Password Dirubah default ke 123" ,
                     }).then(function(){
-                      window.location.href="<?php echo base_url('admin/Administrator/') ?>"
+                      window.location.href="<?php echo base_url('admin/Petugas/') ?>"
                     })
                 } else {
                   alert("Gagal");
@@ -148,11 +150,10 @@ function reset(id){
   }
 //============//
 
-
 $(function(){
       
  //update data diri admin//
-    $("#updateAdmin").on('submit',function(e){
+    $("#updatePetugas").on('submit',function(e){
         e.preventDefault();
           if(document.getElementById('idmember').value == ""){
               swal({
@@ -192,7 +193,7 @@ $(function(){
               })
           }else {
               $.ajax({
-                  url : "<?php echo base_url('admin/Administrator/update') ?>" ,
+                  url : "<?php echo base_url('admin/Petugas/update') ?>" ,
                   method : "POST" ,
                   data : new FormData(this),
                   processData : false ,
@@ -206,12 +207,12 @@ $(function(){
                   },
                   success : function(e){
                     //  alert(e);
-                      if(e == "Berhasil Update Data Admin"){
+                      if(e == "Berhasil Update Data Petugas"){
                         swal({
                           icon : "success" ,
                           title : e 
                         }).then(function(){
-                          window.location.href="<?php echo base_url('admin/Administrator/view/'. $admin->id_akun) ?>"
+                          window.location.href="<?php echo base_url('admin/Petugas/view/'. $petugas->id_akun) ?>"
                         })
                       }else {
                         swal({
@@ -239,7 +240,7 @@ $(function(){
             })
           }else {
             $.ajax({
-                  url : "<?php echo base_url('admin/Administrator/updateProfile') ?>" ,
+                  url : "<?php echo base_url('admin/Petugas/updateProfile') ?>" ,
                   method : "POST" ,
                   data : new FormData(this),
                   processData : false ,
@@ -252,12 +253,12 @@ $(function(){
                      $("#load").hide();
                   },
                   success : function(e){
-                     if(e == "Berhasil Update Administrator"){
+                     if(e == "Berhasil Update Data Petugas"){
                         swal({
                           icon : "success" ,
                           title : e 
                         }).then(function(){
-                          window.location.href="<?php echo base_url('admin/Administrator/view/' . $admin->id_akun) ?>"
+                          window.location.href="<?php echo base_url('admin/Petugas/view/' . $petugas->id_akun) ?>"
                         })
                       }else {
                         swal({

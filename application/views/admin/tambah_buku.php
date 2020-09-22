@@ -2,7 +2,7 @@
     <section class="content-header">
       <h1>
         Master Data Buku
-        <small></small>
+       <small><?php echo date("Y-m-d"); ?> / <span id="jam"></span></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -164,6 +164,12 @@
                   processData : false ,
                   cache : false ,
                   contentType : false ,
+                  beforeSend : function(){
+                    $('.Loading').show();
+                  },
+                  complete : function(){
+                    $('.Loading').hide();
+                  },
                   success : function(e){
                       if(e == "Sukses Input Buku"){
                         swal({

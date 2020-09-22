@@ -2,7 +2,7 @@
     <section class="content-header">
       <h1>
         Master Data Admin
-        <small></small>
+        <small><?php echo date("Y-m-d"); ?> / <span id="jam"></span></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -94,16 +94,16 @@ function del(id){
     .then((willDelete) => {
       if (willDelete) {
           $.ajax({
-            url : "<?php echo base_url('admin/Master_member/hapus') ?>",
+            url : "<?php echo base_url('admin/Administrator/hapus') ?>",
             method : "GET",
             data : "id="+ id ,
             success : function(response){
                 if(response == "Sukses"){
                    swal({
                       icon : "success",
-                      title : "Data Member di Hapus" ,
+                      title : "Data Administrator di Hapus" ,
                     }).then(function(){
-                      window.location.href="<?php echo base_url('admin/Master_member/') ?>"
+                      window.location.href="<?php echo base_url('admin/Administrator/') ?>"
                     })
                 } else {
                   alert("Gagal");

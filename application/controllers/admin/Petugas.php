@@ -4,24 +4,24 @@
 /**
  * 
  */
-class Administrator extends CI_Controller
+class Petugas extends CI_Controller
 {
 	public function index()
  	{
- 		$this->template->load("template/template_admin","admin/administrator");
+ 		$this->template->load("template/template_admin","admin/petugas");
  	}
 
  	public function sendData()
 	{
-		$data = $this->m_admin->cari(array('role_id' => 1 ),"akun")->result();
+		$data = $this->m_admin->cari(array('role_id' => 2),"akun")->result();
 		echo json_encode($data);
 	}
 
 	//form update data akun
 	public function view($id)
 	{
-		$data['admin'] = $this->m_admin->cari(array("id_akun" => $id) ,"akun")->row();
-		$this->template->load("template/template_admin","admin/detail_admin",$data);
+		$data['petugas'] = $this->m_admin->cari(array("id_akun" => $id) ,"akun")->row();
+		$this->template->load("template/template_admin","admin/detail_petugas",$data);
 	}
 
 	//hapus data admin
@@ -53,7 +53,7 @@ class Administrator extends CI_Controller
 				);
 				$input = $this->m_admin->update("akun",$data,array("id" => $this->input->post('id')) );
 					if($input){
-						echo "Berhasil Update Data Admin";
+						echo "Berhasil Update Data Petugas";
 					}else {
 						echo "Gagal";
 					}
@@ -83,13 +83,14 @@ class Administrator extends CI_Controller
 						if(!empty($fileExist)){
 							unlink($target);
 						}
-						echo "Berhasil Update Administrator";
+						echo "Berhasil Update Data Petugas";
 					}else {
 						echo "Gagal";
 					}
 			}
 
 	}
+
 
 	//reset password
 	public function Reset()

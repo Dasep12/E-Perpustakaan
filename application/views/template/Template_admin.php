@@ -38,14 +38,27 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
   <!-- jQuery 3 -->
   <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
+  <style type="text/css">
+    .Loading {
+      width: 100%;
+      height: 100%;
+      position: fixed; 
+      text-indent: 100%;
+      background: #e0e0e0 url('<?= base_url("assets/dist/img/loading.gif") ?>') no-repeat center ;
+      z-index: 4;
+      opacity: 0.7 ;
+      background-size: 12%;
+      display: none;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
+<div class="Loading"></div>
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo base_url('assets')?>/index2.html" class="logo">
+    <a href="<?php echo base_url('admin/Dashboard')?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E-</b>PRPUS</span>
       <!-- logo for regular state and mobile devices -->
@@ -70,7 +83,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
           <li class="dropdown user user-menu">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <?php if(empty($profile->photo)) { ?>
-                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="user-image" alt="User Image">
+                 <img src="<?php echo base_url('assets/dist/img/001admG001.jpg')?>" class="user-image" alt="User Image">
                 <?php }else { ?>
                  <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="user-image" alt="User Image">
                 <?php } ?>
@@ -80,7 +93,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
               <!-- User image -->
               <li class="user-header">
                 <?php if(empty($profile->photo)) { ?>
-                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                 <img src="<?php echo base_url('assets/dist/img/001admG001.jpg')?>" class="img-circle" alt="User Image">
                 <?php }else { ?>
                  <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
                 <?php } ?>
@@ -119,7 +132,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
       <div class="user-panel">
         <div class="pull-left image">
            <?php if(empty($profile->photo)) { ?>
-                 <img src="<?php echo base_url('assets/poto/001admG001.jpg')?>" class="img-circle" alt="User Image">
+                 <img src="<?php echo base_url('assets/dist/img/001admG001.jpg')?>" class="img-circle" alt="User Image">
                 <?php }else { ?>
                  <img src="<?php echo base_url('assets/poto/'. $profile->photo)?>" class="img-circle" alt="User Image">
                 <?php } ?>
@@ -144,7 +157,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="../widgets.html">
+          <a href="<?php echo base_url('admin/Dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li> 
@@ -196,7 +209,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
             <li class="<?php if($url == "LaporanData_Anggota") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/LaporanData_Anggota') ?>"><i class="fa fa-circle-o"></i> Laporan Data Anggota</a></li>
           </ul>
         </li>
-        <li class="treeview <?php if($url == "Administrator" || $url == "Petugas" || $url == "Tambah_Pengelola" ) { echo "active" ; } ?>">
+        <li class="treeview <?php if($url == "Administrator" || $url == "Petugas" || $url == "TambahPengelola" ) { echo "active" ; } ?>">
           <a href="#">
             <i class="fa fa-users"></i> <span>Pengelola</span>
             <span class="pull-right-container">
@@ -206,7 +219,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
           <ul class="treeview-menu">
             <li class="<?php if($url == "Administrator") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Administrator') ?>"><i class="fa fa-circle-o"></i> Administrator</a></li>
             <li class="<?php if($url == "Petugas") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Petugas') ?>"><i class="fa fa-circle-o"></i> Petugas</a></li>
-            <li class="<?php if($url == "Tambah_Pengelola") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/Tambah_Pengelola') ?>"><i class="fa fa-circle-o"></i> Tambah Pengelola</a></li>
+            <li class="<?php if($url == "TambahPengelola") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/TambahPengelola') ?>"><i class="fa fa-circle-o"></i> Tambah Pengelola</a></li>
           </ul>
         </li>
         <!-- <li class="treeview">
@@ -525,6 +538,18 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
     $('#example1').DataTable()
     
   })
+
+  function waktu(){
+        const time = new Date();
+        const jam = time.getHours();
+        const menit = time.getMinutes();
+        const detik = time.getSeconds();
+        setTimeout("waktu()",1000);
+        document.getElementById('jam').innerHTML = jam +  ":" + menit + ":" + detik ;
+
+      }
+
+      setTimeout(waktu(), 1000 );
 </script>
 </body>
 </html>
