@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Sep 2020 pada 05.23
+-- Waktu pembuatan: 22 Sep 2020 pada 14.23
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.30
 
@@ -43,8 +43,9 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id`, `nama`, `id_akun`, `photo`, `password`, `no_telp`, `email`, `role_id`) VALUES
-(1, 'Dasep', '002', '', '123', '083821691460', 'dasep@gmail.com', 1),
-(2, 'Petugas', '003', '003ppppp.png', '123', 'dd', 'petugas@gmail.com', 2);
+(1, 'Dasep Depiyawan', '002', '002admin2.png', '123', '083821619460', 'dasepdepiyawan@gmail.com', 1),
+(2, 'Petugas', '003', '003admin2.png', '123', '0216194600', 'petugas@gmail.com', 2),
+(6, 'AFAN WIJAYA ', '226810', '226810satudin.png', '123', '0216194600121', 'afan@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,8 @@ CREATE TABLE `histori_kembali` (
 
 INSERT INTO `histori_kembali` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`, `status`, `denda`, `telat_pengembalian`, `total_lama_pinjam`) VALUES
 (22, 'EPERPUS20200921658840468635', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-16', '2020-09-21', '2020-09-19', '09:14:47', NULL, '4000', '2', '5'),
-(23, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19', NULL, '0', '0', '3');
+(23, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19', NULL, '0', '0', '3'),
+(24, 'EPERPUS20200922624878749416', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-22', '2020-09-22', '2020-09-30', '17:44:25', NULL, '0', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,8 @@ CREATE TABLE `histori_pinjam` (
 
 INSERT INTO `histori_pinjam` (`id`, `id_peminjaman`, `judul_buku`, `kd_buku`, `id_peminjam`, `peminjam`, `tgl_pinjam`, `tgl_dikembalikan`, `tgl_kembali`, `jam_kembali`) VALUES
 (40, 'EPERPUS20200921658840468635', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-16', '2020-09-21', '2020-09-19', '09:14:47'),
-(41, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19');
+(41, 'EPERPUS20200921546530546279', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-18', '2020-09-21', '2020-09-30', '09:45:19'),
+(42, 'EPERPUS20200922624878749416', 'Pandai Menghitung', 'BK005', '01', 'Dasep Depiyawan', '2020-09-22', '2020-09-22', '2020-09-30', '17:44:25');
 
 -- --------------------------------------------------------
 
@@ -127,7 +130,9 @@ CREATE TABLE `master_buku` (
 
 INSERT INTO `master_buku` (`id`, `kd_buku`, `judul_buku`, `thn_terbit`, `pengarang`, `lokasi`, `jumlah`, `genre`) VALUES
 (37, 'BK0090', 'Belajar Membaca', '2020', 'Satudin S,Pd', 'Rak-01', 0, 'Edukasi'),
-(38, 'BK005', 'Pandai Menghitung', '2020', 'Brian S,Kom', 'RAK-02', 5, 'Edukasi');
+(38, 'BK005', 'Pandai Menghitung', '2020', 'Brian S,Kom', 'RAK-02', 5, 'Edukasi'),
+(95, 'BK007', 'Pemrograman Web', '2012', 'Rika S,Pd', 'Rak-07', 10, 'Edukasi'),
+(96, 'BK0011', 'Dasar Javascript', '2016', 'Dasep Depiyawan S,Kom', 'RAK-09', 5, 'Edukasi');
 
 -- --------------------------------------------------------
 
@@ -151,7 +156,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `nama`, `id_user`, `no_telp`, `email`, `alamat`, `status`, `photo`) VALUES
-(1, 'Dasep Depiyawan', '01', '083821619460', 'dasepdepiyawan19@gmail.com', 'Jl Lodan Dalam Raya II c Jakarta Utara', 'Member', '01admin2.png');
+(1, 'Dasep Depiyawan', '01', '083821619460', 'dasepdepiyawan19@gmail.com', 'Jl Lodan Dalam Raya II c Jakarta Utara', 'Member', '01siswa.jpg');
 
 -- --------------------------------------------------------
 
@@ -219,25 +224,25 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `histori_kembali`
 --
 ALTER TABLE `histori_kembali`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `histori_pinjam`
 --
 ALTER TABLE `histori_pinjam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_buku`
 --
 ALTER TABLE `master_buku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT untuk tabel `member`
@@ -249,7 +254,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT untuk tabel `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

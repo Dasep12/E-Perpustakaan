@@ -1,5 +1,6 @@
 <?php $url = $this->uri->segment(2);
-$profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
+$profile = $this->m_admin->cari(array("role_id" => 1 )  , "akun")->row() ;
+$sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
  ?>
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,8 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
   <!-- jQuery 3 -->
   <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
+  <!-- ChartJS -->
+  <script src="<?php echo base_url('assets')?>/bower_components/chart.js/Chart.js"></script>
   <style type="text/css">
     .Loading {
       width: 100%;
@@ -191,7 +194,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 1 )  , "akun")->row() ;
         <li class=" <?php if($url == "Sirkulasi") { echo "active" ; } ?>">
           <a  href="<?php echo base_url('admin/Sirkulasi') ?>">
             <i class="fa  fa-mail-forward "></i> <span>Sirkulasi Peminjaman</span>
-             <small class="label pull-right bg-red">3</small>
+             <small class="label pull-right bg-red"><?php echo $sirkulasi; ?></small>
           </a>
         </li> 
 

@@ -57,4 +57,11 @@ class M_admin extends CI_Model
 		return $this->db->get($table);
 
 	}
+
+	//buat grafik peminjaman buku
+	public function grafikPinjam($where)
+	{
+		$query = $this->db->query("SELECT COUNT(tgl_pinjam) as total FROM histori_pinjam WHERE tgl_pinjam LIKE '%". $where ."%' ");
+		return $query->row() ;
+	}
 }
