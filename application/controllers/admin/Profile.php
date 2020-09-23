@@ -7,7 +7,7 @@
  {
  	public function index()
  	{
- 		$data['admin'] = $this->m_admin->cari(array("role_id" => 1 )  , "akun")->row() ;
+ 		$data['admin'] = $this->m_admin->cari(array("role_id" => $this->session->userdata('role_id') , "id" => $this->session->userdata('id') )  , "akun")->row() ;
  		$this->template->load("template/template_admin","admin/profile",$data);
  	}
 

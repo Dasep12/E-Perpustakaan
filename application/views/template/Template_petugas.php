@@ -1,5 +1,5 @@
 <?php $url = $this->uri->segment(2); 
-$profile = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
+$profile = $this->m_petugas->cari(array("role_id" => $this->session->userdata("role_id") , "id" => $this->session->userdata("id") )  , "akun")->row() ;
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,11 +48,24 @@ $profile = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
   <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
+  <style type="text/css">
+    .Loading {
+      width: 100%;
+      height: 100%;
+      position: fixed; 
+      text-indent: 100%;
+      background: #e0e0e0 url('<?= base_url("assets/dist/img/loading.gif") ?>') no-repeat center ;
+      z-index: 4;
+      opacity: 0.7 ;
+      background-size: 12%;
+      display: none;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
+<div class="Loading"></div>
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo base_url('assets')?>/index2.html" class="logo">
@@ -105,7 +118,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
                   <a href="<?php echo base_url('petugas/Profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -135,7 +148,7 @@ $profile = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
                 <?php } ?>
         </div>
         <div class="pull-left info">
-          <p>Dasep</p>
+          <p><?php echo $profile->nama ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

@@ -49,7 +49,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $jmlmember; ?></h3>
 
               <p>Member</p>
             </div>
@@ -64,7 +64,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?php echo $peminjaman ?></h3>
 
               <p>Pengunjung</p>
             </div>

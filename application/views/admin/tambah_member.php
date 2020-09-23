@@ -32,7 +32,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">ID Member</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="idmember" id="idmember" placeholder="Input ID Member">
+                    <input type="text" class="form-control" readonly="" name="idmember" value="<?php echo $idmember ?>" id="idmember" placeholder="Input ID Member">
                   </div>
                 </div>
 

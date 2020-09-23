@@ -184,6 +184,12 @@ function cek(){
                   processData : false ,
                   cache : false ,
                   contentType : false ,
+                  beforeSend : function(){
+                    $(".Loading").show();
+                  },
+                  complete : function(){
+                    $(".Loading").hide();
+                  },
                   success : function(e){
                       if(e == "Update Password Sukses"){
                         swal({

@@ -33,7 +33,7 @@
                    <?php if(!empty($member->photo)) { ?>
                     <img style="height: 300px;width: 350px;" class="img img-thumbnail" src="<?php echo base_url('assets/poto/' . $member->photo) ?>">
                    <?php }else { ?>
-                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/poto/siswa.jpg') ?>">
+                    <img height="350px" width="350px" class="img img-thumbnail " src="<?php echo base_url('assets/dist/img/siswa.jpg') ?>">
                    <?php } ?>
                    <input type="hidden" name="id" value="<?php echo $member->id; ?>">
                    <input type="hidden" name="photo" value="<?php echo $member->photo; ?>">

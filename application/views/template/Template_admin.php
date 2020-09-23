@@ -1,5 +1,5 @@
 <?php $url = $this->uri->segment(2);
-$profile = $this->m_admin->cari(array("role_id" => 1 )  , "akun")->row() ;
+$profile = $this->m_admin->cari(array("role_id" => $this->session->userdata('role_id')  , "id" => $this->session->userdata('id') )  , "akun")->row() ;
 $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
  ?>
 <!DOCTYPE html>
@@ -111,7 +111,7 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
                   <a href="<?php echo base_url('admin/Profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -141,7 +141,7 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
                 <?php } ?>
         </div>
         <div class="pull-left info">
-          <p>Depiyawan</p>
+          <p><?php echo $profile->nama; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -225,6 +225,11 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
             <li class="<?php if($url == "TambahPengelola") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/TambahPengelola') ?>"><i class="fa fa-circle-o"></i> Tambah Pengelola</a></li>
           </ul>
         </li>
+        <li class="treeview <?php if($url == "Backup"  ) { echo "active" ; } ?>">
+          <a href="<?php echo base_url('admin/Backup') ?>">
+            <i class="fa fa-database"></i> <span>Backup Database</span>
+          </a>
+        </li> 
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -314,12 +319,11 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
+ <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <b>YOUR IP</b> <?php echo $_SERVER['REMOTE_ADDR'] ?>
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2014-2016 <a href="">Dasep Depiyawan</a>.</strong> E-Perpustakaan
   </footer>
 
   <!-- Control Sidebar -->

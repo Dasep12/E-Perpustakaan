@@ -18,7 +18,15 @@ class Master_member extends CI_Controller
 	//form input tambah member 
 	public function Tambah_member()
 	{
-		$this->template->load("template/template_admin","admin/tambah_member");
+		  $token = "";
+          $codeAlphabet= "0123456789";
+          $max = strlen($codeAlphabet); // edited
+            
+          for ($i=0; $i < 6 ; $i++) {
+           $token .= $codeAlphabet[random_int(0, $max-1)];
+          }
+          $data['idmember'] = $token;
+		$this->template->load("template/template_admin","admin/tambah_member",$data);
 	}
 
 	//input data member 
@@ -90,6 +98,13 @@ class Master_member extends CI_Controller
 	public function hapus()
 	{
 		$id = $this->input->get("id");
+		$hapusFile = $this->m_admin->cari(array('id' => $id) , "member")->row();
+		if(!empty($hapusFile->photo)){
+			$target = './assets/poto/' . $hapusFile->photo ;
+			unlink($target) ;
+		}
+
+
 		$hapus = $this->m_admin->delete(array('id' => $id),"member");
 		if($hapus){
 			echo "Sukses";
@@ -137,7 +152,9 @@ class Master_member extends CI_Controller
 				);
 				$update = $this->m_admin->update("member",$data,array("id" => $this->input->post('id')) );;
 					if($update){
-						unlink($target);
+						if(!empty($fileExist)){
+							unlink($target);
+						}
 						echo "Berhasil Update Member";
 					}else {
 						echo "Gagal";

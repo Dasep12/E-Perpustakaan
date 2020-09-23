@@ -23,6 +23,7 @@
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
           </div>
+          Profile
         </div>
         <div class="box-body">
           <div class="row">

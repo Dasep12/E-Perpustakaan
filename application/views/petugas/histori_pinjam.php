@@ -65,7 +65,7 @@
            var data = [] ;
            var j = 1 ;
             for(i=0 ; i < msg.length ; i++){
-              data.push([j++ , "<a href='' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  ]);
+              data.push([j++ , "<a href='#' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  ]);
             }
             //tampilkan data buku yang di kirim lewat ajax ke datatable
             $("#masterBuku").DataTable({

@@ -7,7 +7,7 @@
  {
  	public function index()
  	{
- 		$data['petugas'] = $this->m_petugas->cari(array("role_id" => 2 )  , "akun")->row() ;
+ 		$data['petugas'] = $this->m_petugas->cari(array("role_id" =>$this->session->userdata("role_id") , "id" => $this->session->userdata("id"))  , "akun")->row() ;
  		$this->template->load("template/template_petugas","petugas/profile",$data);
  	}
 

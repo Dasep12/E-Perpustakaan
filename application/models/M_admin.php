@@ -64,4 +64,17 @@ class M_admin extends CI_Model
 		$query = $this->db->query("SELECT COUNT(tgl_pinjam) as total FROM histori_pinjam WHERE tgl_pinjam LIKE '%". $where ."%' ");
 		return $query->row() ;
 	}
+
+
+	//cek data password dan id_akun untuk login
+	public function cekLogin($user,$password)
+	{
+		return $this->db->get_where("akun", array("id_akun"	=> $user , "password" => $password) );
+	}
+
+	//
+	public function cek($cek,$colom)
+	{
+		return $this->db->get_where("akun" , array($colom => $cek));
+	}
 }

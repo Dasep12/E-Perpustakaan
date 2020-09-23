@@ -58,7 +58,7 @@
                         	if($tgl1 < $tgl2  && $tgl1 != $tgl2){
                         		$telat = $tgl2->diff($tgl1)->d;
                         		echo "telat " . $telat. " hari<br>";
-                        		echo "<button class='btn btn-xs btn-primary'>denda Rp." . $telat * 2000 . "</button>" ;
+                        		echo "<button type='button' class='btn btn-xs btn-primary'>denda Rp." . $telat * 2000 . "</button>" ;
                         	}else {
                         		echo "-";
                         	}
@@ -143,6 +143,12 @@ function kembalikan(id){
             url : "<?php echo base_url('petugas/Peminjaman/kembalikanBuku') ?>",
             method : "GET",
             data : "id="+ id ,
+            beforeSend : function(){
+              $(".Loading").show();
+            },
+            complete : function(){
+              $(".Loading").hide();
+            },
             success : function(response){
                 if(response == "Sukses"){
                   swal({
@@ -218,6 +224,12 @@ $('#example1').DataTable();
                   method : "POST" ,
                   processData : false ,
                   contentType : false ,
+                  beforeSend : function(){
+                    $(".Loading").show();
+                  },
+                  complete : function(){
+                    $(".Loading").hide();
+                  },
                   success : function(e){
                       if(e == "Berhasil"){
                         swal({
