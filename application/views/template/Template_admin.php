@@ -159,7 +159,7 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li>
+        <li class="<?php if($url == "Dashboard"  ) { echo "active" ; } ?>">
           <a href="<?php echo base_url('admin/Dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
@@ -225,7 +225,7 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
             <li class="<?php if($url == "TambahPengelola") { echo "active" ; } ?>"><a href="<?php echo base_url('admin/TambahPengelola') ?>"><i class="fa fa-circle-o"></i> Tambah Pengelola</a></li>
           </ul>
         </li>
-        <li class="treeview <?php if($url == "Backup"  ) { echo "active" ; } ?>">
+        <li class="<?php if($url == "Backup"  ) { echo "active" ; } ?>">
           <a href="<?php echo base_url('admin/Backup') ?>">
             <i class="fa fa-database"></i> <span>Backup Database</span>
           </a>

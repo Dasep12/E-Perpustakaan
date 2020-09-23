@@ -5,6 +5,19 @@
   */
  class Profile extends CI_Controller
  {
+
+ 	public function __Construct()
+	{
+		parent::__construct();
+			if($this->session->userdata("role_id") != 1 ){
+				redirect("Login");
+			}else if(empty($this->session->userdata("id"))){
+				$this->session->set_flashdata('errlog','login dulu');
+				redirect("Login");
+			}
+	}
+
+	
  	public function index()
  	{
  		$data['admin'] = $this->m_admin->cari(array("role_id" => $this->session->userdata('role_id') , "id" => $this->session->userdata('id') )  , "akun")->row() ;

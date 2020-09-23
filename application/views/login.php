@@ -66,11 +66,11 @@
         <div class="alert alert-danger mt-2">
               <center>akun tidak terdaftar di sistem kami</center>
         </div>
-      <?php  }else if($this->session->flashdata("errpass")){ ?>
+      <?php  }elseif($this->session->flashdata("errpass")){ ?>
            <div class="alert alert-danger mt-2">
              <center>password salah</center> 
         </div>
-      <?php }else if($this->session->flashdata('errlog')){ ?>
+      <?php }elseif($this->session->flashdata('errlog')){ ?>
         <div class="alert alert-danger mt-2">
              <center>sesi anda telah berakhir</center> 
         </div>

@@ -5,6 +5,19 @@
  */
 class Login extends CI_Controller
 {
+
+	public function __Construct()
+	{
+		parent::__construct();
+			if($this->session->userdata("role_id") == 1 && !empty($this->session->userdata("role_id"))  ){
+				redirect("admin/Dashboard");
+			}else if($this->session->userdata("role_id") == 2 && !empty($this->session->userdata("role_id"))){
+				$this->session->set_flashdata('errlog','login dulu');
+				redirect("petugas/Form_pinjam");
+			}
+	}
+
+
 	public function index()
 	{
 		$this->load->view("login");

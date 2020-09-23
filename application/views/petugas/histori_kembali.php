@@ -39,6 +39,7 @@
                   <th>Tanggal Kembali</th>
                   <th>Tanggal Di Kembalikan</th>
                   <th>Telat Kembali</th>
+                  <th>Lama Pinjam</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,7 +70,7 @@
            var data = [] ;
            var j = 1 ;
             for(i=0 ; i < msg.length ; i++){
-              data.push([j++ , "<a href='#' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  , msg[i].tgl_pinjam  , msg[i].tgl_kembali , msg[i].tgl_dikembalikan + "/" + msg[i].jam_kembali , msg[i].telat_pengembalian ]);
+              data.push([j++ , "<a href='#' class='btn btn-xs btn-info'>" + msg[i].id_peminjaman + "</a>" , msg[i].judul_buku , msg[i].kd_buku , msg[i].peminjam  , msg[i].tgl_pinjam  , msg[i].tgl_kembali , msg[i].tgl_dikembalikan + "/" + msg[i].jam_kembali , msg[i].telat_pengembalian , msg[i].total_lama_pinjam ]);
             }
             //tampilkan data buku yang di kirim lewat ajax ke datatable
             $("#masterBuku").DataTable({
