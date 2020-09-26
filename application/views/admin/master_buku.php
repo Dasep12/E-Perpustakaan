@@ -48,9 +48,7 @@
     
         </div>
         <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->
-
+ 
     </section>
     <!-- /.content -->
 

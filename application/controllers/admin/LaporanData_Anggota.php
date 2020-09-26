@@ -1,8 +1,4 @@
 <?php
-require('./vendor/autoload.php');
-date_default_timezone_set('Asia/Jakarta');
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 /**
  * 
  */
@@ -27,38 +23,47 @@ class LaporanData_Anggota extends CI_Controller
 
 	public function report()
 	{
-		$report = $this->m_admin->sendData("member")->result();
-		$spreadsheet = new Spreadsheet;
-          $spreadsheet->setActiveSheetIndex(0)
-                      ->setCellValue('A1', 'No')
-                      ->setCellValue('B1', 'ID Anggota')
-                      ->setCellValue('C1', 'Nama')
-                      ->setCellValue('D1', 'No Telpon')
-                      ->setCellValue('E1', 'Email')
-                      ->setCellValue('F1', 'Alamat');
+		$this->load->library("excel");
 
-          $kolom = 2;
-          $nomor = 1;
-          foreach($report as $pengguna) {
+      $object = new PHPExcel();
 
-               $spreadsheet->setActiveSheetIndex(0)
-                           ->setCellValue('A' . $kolom, $nomor)
-                           ->setCellValue('B' . $kolom, $pengguna->id_user)
-                           ->setCellValue('C' . $kolom, $pengguna->nama)
-                           ->setCellValue('D' . $kolom, $pengguna->no_telp)
-                           ->setCellValue('E' . $kolom, $pengguna->email)
-                           ->setCellValue('F' . $kolom, $pengguna->alamat);
+      $object->setActiveSheetIndex(0);
 
-               $kolom++;
-               $nomor++;
+      $table_columns = array("No", "ID Member" ,"Nama" , "No Telpon" ,"Email" , "Alamat" );
 
-          }
+      $column = 0;
+      $no  = 1 ;
+      foreach($table_columns as $field){
 
-          $writer = new Xlsx($spreadsheet);
+        $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
 
-          header('Content-Type: application/vnd.ms-excel');
-		  header('Content-Disposition: attachment;filename="RptDataAnggota'. date('ymd').'.xlsx"');
-		  header('Cache-Control: max-age=0');
-		  $writer->save('php://output');
+        $column++;
+
+      }
+
+      $data = $this->m_admin->sendData("member")->result();;
+
+      $excel_row = 2;
+
+      foreach($data as $row){
+
+        $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $no++);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->id_user);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->nama);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->no_telp);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->email);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->alamat);
+
+        $excel_row++;
+
+      }
+
+      $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+
+      header('Content-Type: application/vnd.ms-excel');
+
+      header('Content-Disposition: attachment;filename="RptDataAnggota.xls"');
+
+      $object_writer->save('php://output');
 	}
 }

@@ -1,8 +1,4 @@
 <?php
-require('./vendor/autoload.php');
-date_default_timezone_set('Asia/Jakarta');
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 /**
  * 
  */
@@ -29,48 +25,55 @@ class LaporanPengembalian extends CI_Controller
 	{
 		$tglawal = $this->input->post("tgl_awal");
 		$tglakhir = $this->input->post("tgl_akhir");
-		$report = $this->m_admin->report2($tglawal, $tglakhir , "histori_kembali")->result();
-		$spreadsheet = new Spreadsheet;
-          $spreadsheet->setActiveSheetIndex(0)
-                      ->setCellValue('A1', 'No')
-                      ->setCellValue('B1', 'ID Peminjaman')
-                      ->setCellValue('C1', 'Judul Buku')
-                      ->setCellValue('D1', 'Kode Buku')
-                      ->setCellValue('E1', 'Peminjam')
-                      ->setCellValue('F1', 'ID Peminjam')
-                      ->setCellValue('G1', 'Tanggal Pinjam')
-                      ->setCellValue('H1', 'Tanggal Kembali')
-                      ->setCellValue('I1', 'Tanggal Dikembalikan')
-                      ->setCellValue('J1', 'Lama Peminjaman')
-                      ->setCellValue('K1', 'Terlambat Pengembalian');
+		$data = $this->m_admin->report2($tglawal, $tglakhir , "histori_kembali")->result();
+		$this->load->library("excel");
 
-          $kolom = 2;
-          $nomor = 1;
-          foreach($report as $pengguna) {
-               $spreadsheet->setActiveSheetIndex(0)
-                           ->setCellValue('A' . $kolom, $nomor)
-                           ->setCellValue('B' . $kolom, $pengguna->id_peminjaman)
-                           ->setCellValue('C' . $kolom, $pengguna->judul_buku)
-                           ->setCellValue('D' . $kolom, $pengguna->kd_buku)
-                           ->setCellValue('E' . $kolom, $pengguna->peminjam)
-                           ->setCellValue('F' . $kolom, $pengguna->id_peminjam)
-                           ->setCellValue('G' . $kolom, $pengguna->tgl_pinjam)
-                           ->setCellValue('H' . $kolom, $pengguna->tgl_kembali)
-                           ->setCellValue('I' . $kolom, $pengguna->tgl_dikembalikan)
-                           ->setCellValue('J' . $kolom, $pengguna->total_lama_pinjam)
-                           ->setCellValue('K' . $kolom, $pengguna->telat_pengembalian);
+      $object = new PHPExcel();
 
-               $kolom++;
-               $nomor++;
+      $object->setActiveSheetIndex(0);
 
-          }
+      $table_columns = array("No", "ID Peminjaman" ,"Judul Buku" , "ID Buku" ,"Peminjam" , "ID Peminjam" ,"Tanggal Pinjam" , "Tanggal Kembali" , "Tanggal Dikembalikan" , "Jam Kembali" , "Denda" , "Telat Pengembalian" , "Total Lama Peminjaman");
 
-          $writer = new Xlsx($spreadsheet);
+      $column = 0;
+      $no  = 1 ;
+      foreach($table_columns as $field){
 
-          header('Content-Type: application/vnd.ms-excel');
-    		  header('Content-Disposition: attachment;filename="RptPengembalian'. date('ymd').'.xlsx"');
-    		  header('Cache-Control: max-age=0');
-    		  $writer->save('php://output');
+        $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
+
+        $column++;
+
+      }
+
+
+      $excel_row = 2;
+
+      foreach($data as $row){
+
+        $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $no++);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->id_peminjaman);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->judul_buku);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->kd_buku);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->peminjam);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->id_peminjam);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $row->tgl_pinjam);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row, $row->tgl_kembali);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(8, $excel_row, $row->tgl_dikembalikan);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row, $row->jam_kembali);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(10, $excel_row, $row->denda);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(11, $excel_row, $row->telat_pengembalian);
+        $object->getActiveSheet()->setCellValueByColumnAndRow(12, $excel_row, $row->total_lama_pinjam);
+
+        $excel_row++;
+
+      }
+
+      $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+
+      header('Content-Type: application/vnd.ms-excel');
+
+      header('Content-Disposition: attachment;filename="RptDataPengembalianBuku"' . date('ymd') . '".xls"');
+
+      $object_writer->save('php://output');
 	}
 
 

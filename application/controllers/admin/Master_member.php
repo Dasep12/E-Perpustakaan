@@ -36,7 +36,7 @@ class Master_member extends CI_Controller
           $max = strlen($codeAlphabet); // edited
             
           for ($i=0; $i < 6 ; $i++) {
-           $token .= $codeAlphabet[random_int(0, $max-1)];
+           $token .= $codeAlphabet[mt_rand(0, $max-1)];
           }
           $data['idmember'] = $token;
 		$this->template->load("template/template_admin","admin/tambah_member",$data);

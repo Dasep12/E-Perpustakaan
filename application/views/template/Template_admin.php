@@ -38,6 +38,7 @@ $sirkulasi = $this->m_admin->sendData("peminjaman")->num_rows();
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- jQuery 3 -->
   <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="<?php echo base_url('assets')?>/bower_components/jquery/dist/jquery.js"></script>
   <script src="<?php echo base_url('assets')?>/sweetalert/sweetalert.min.js"></script>
   <!-- ChartJS -->
   <script src="<?php echo base_url('assets')?>/bower_components/chart.js/Chart.js"></script>

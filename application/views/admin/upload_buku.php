@@ -28,7 +28,7 @@
           <a href="<?php echo base_url('admin/Master_buku/Tambah_buku') ?>" class="btn btn-success btn-sm mb-2">Tambah Buku <i class="fa fa-plus"></i> </a>
         </div>
         <div class="box-body">
-          <form action="" method="post" id="uploadFile">
+          <form action="" enctype="multipart/form-data" method="post" id="uploadFile">
             <div class="form-group mb-2">
             <label>Upload File di sini</label>
             <input type="file" onchange="return cek()" class="form-control" name="file" id="file">
